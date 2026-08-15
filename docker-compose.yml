@@ -1,0 +1,45 @@
+services:
+  vllm-nvfp4:
+    image: ${IMAGE:-vllm-qwen38-27b:ampere}
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: runtime
+      args:
+        VLLM_BASE_IMAGE: ${VLLM_BASE_IMAGE:-vllm/vllm-openai:nightly}
+    gpus: all
+    ipc: host
+    shm_size: "16gb"
+    ports:
+      - "${PORT:-8000}:8000"
+    volumes:
+      - ./models:/models:ro
+    environment:
+      NVIDIA_VISIBLE_DEVICES: "${NVIDIA_VISIBLE_DEVICES:-0,1}"
+    command:
+      - /models/Qwen3.8-27B-NVFP4
+      - --host
+      - "0.0.0.0"
+      - --port
+      - "8000"
+      - --tensor-parallel-size
+      - "2"
+      - --dtype
+      - auto
+      - --kv-cache-dtype
+      - auto
+      - --max-model-len
+      - "${MAX_MODEL_LEN:-32768}"
+      - --gpu-memory-utilization
+      - "${GPU_MEM:-0.93}"
+      - --max-num-seqs
+      - "${MAX_NUM_SEQS:-4}"
+      - --language-model-only
+      - --reasoning-parser
+      - qwen3
+      - --enable-auto-tool-choice
+      - --tool-call-parser
+      - qwen3_coder
+      - --trust-remote-code
+      - --linear-backend
+      - marlin

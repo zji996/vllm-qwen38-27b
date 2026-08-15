@@ -1,0 +1,4 @@
+# Extra Python deps on top of vllm/vllm-openai:nightly.
+# Qwen3.8-27B config.json was written by transformers 5.14.x; recipes require >=5.8.
+# Nightly already ships transformers 5.15.0; keep the floor so older bases still work.
+transformers>=5.8.0
