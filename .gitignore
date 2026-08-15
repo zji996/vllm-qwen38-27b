@@ -1,0 +1,40 @@
+# Local model artifacts (large; never commit weights)
+/models/*
+!/models/README.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Local agent / runtime artifacts
+.local/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+credentials.json
+
+# Logs / caches
+*.log
+logs/
+.cache/
+.huggingface/

@@ -1,0 +1,18 @@
+# Keep the overlay build context small. The default `runtime` target only
+# needs docker/requirements-extra.txt; `overlay` also needs third_party/vllm.
+.git
+.local
+logs
+models
+docs
+*.log
+**/.cache
+**/__pycache__
+**/*.pyc
+
+third_party/vllm/.git
+third_party/vllm/docs
+third_party/vllm/tests
+third_party/vllm/benchmarks
+third_party/vllm/.buildkite
+third_party/vllm/.github
